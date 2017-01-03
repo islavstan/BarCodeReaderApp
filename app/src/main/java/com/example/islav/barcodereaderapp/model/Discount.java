@@ -7,11 +7,21 @@ public class Discount {
     private String discount_percent;
     private String code;
     private String path;
+    private int publicAccess;
 
-    public Discount(String name, String discount_percent,String barcode) {
+    public int getPublicAccess() {
+        return publicAccess;
+    }
+
+    public void setPublicAccess(int publicAccess) {
+        this.publicAccess = publicAccess;
+    }
+
+    public Discount(String name, String discount_percent, String barcode,int publicAccess) {
         this.name = name;
         this.discount_percent = discount_percent;
         this.code = barcode;
+        this.publicAccess=publicAccess;
     }
 
     public String getName() {

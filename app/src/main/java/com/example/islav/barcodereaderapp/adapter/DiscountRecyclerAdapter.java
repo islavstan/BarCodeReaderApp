@@ -57,6 +57,7 @@ public DiscountRecyclerAdapter(List<Discount>discountList){
                 intent.putExtra("name",discount.getName());
                 intent.putExtra("percent",discount.getDiscount_percent());
                 intent.putExtra("code",discount.getCode());
+                intent.putExtra("access",discount.getPublicAccess());
                 holder.name.getContext().startActivity(intent);
             }
         });

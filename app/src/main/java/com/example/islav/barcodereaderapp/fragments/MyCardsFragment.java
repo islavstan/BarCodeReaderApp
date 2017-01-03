@@ -64,7 +64,8 @@ public class MyCardsFragment extends Fragment {
                     String name = c.getString(c.getColumnIndex("name"));
                     String percent = c.getString(c.getColumnIndex("percent"));
                     String code = c.getString(c.getColumnIndex("barcode"));
-                    discountList.add(new Discount(name, percent, code));
+                    int publicAcces =c.getInt(c.getColumnIndex("public"));
+                    discountList.add(new Discount(name, percent, code,publicAcces));
 
                 }
             }

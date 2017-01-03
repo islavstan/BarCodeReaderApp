@@ -43,14 +43,23 @@ public class SimpleScannerActivity extends Activity implements ZXingScannerView.
         // Do something with the result here
      // Toast.makeText(this,rawResult.getText(),Toast.LENGTH_SHORT).show(); // Prints scan results
       //  Log.v("Stas", rawResult.getBarcodeFormat().toString()); // Prints the scan format (qrcode, pdf417 etc.)
-        Toast.makeText(this,rawResult.getText(),Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(this,rawResult.getText(),Toast.LENGTH_SHORT).show();
        //finish();
         // If you would like to resume scanning, call this method below:
         mScannerView.resumeCameraPreview(this);
       //  mScannerView.stopCamera();
         Intent intent = new Intent();
-        intent.putExtra("code",rawResult.getText());
-        setResult(CODE,intent);
-        finish();
+
+        if(!rawResult.getText().matches("^\\D*$")){
+//содержит
+            intent.putExtra("code",rawResult.getText());
+            setResult(CODE,intent);
+            finish();
+        }else{
+//не содержит
+            Toast.makeText(this,"Ошибка сканирования, повторите снова",Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 }

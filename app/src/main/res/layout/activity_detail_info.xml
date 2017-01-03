@@ -28,6 +28,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="магазин"
+        android:textColor="#000000"
         android:gravity="center"
     android:id="@+id/shop_name"
     android:textSize="24sp"
@@ -37,11 +38,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="5"
+        android:textColor="#000000"
         android:gravity="center"
         android:id="@+id/percent"
         android:textSize="20sp"
         android:layout_margin="10dp"/>
 
-
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    android:textAlignment="center"
+    android:textSize="18sp"
+    android:layout_margin="10dp"
+    android:text="Не все торговые точки могут считать штрихкод с телефона"
+    />
 
 </LinearLayout>

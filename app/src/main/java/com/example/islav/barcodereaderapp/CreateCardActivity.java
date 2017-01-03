@@ -34,6 +34,8 @@ EditText edit_name;
         setContentView(R.layout.activity_create_card);
          toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle("Добавить дисконт");
         edit_barcode=(EditText)findViewById(R.id.edit_barcode);
         edit_discount=(EditText)findViewById(R.id.edit_discount);
         edit_name=(EditText)findViewById(R.id.edit_name);
@@ -69,21 +71,33 @@ EditText edit_name;
         int id = item.getItemId();
         switch (id) {
             case R.id.save:
-                SQLiteDatabase db = dbHelper.getWritableDatabase();
-                ContentValues cv = new ContentValues();
-                cv.put("name",edit_name.getText().toString());
-                cv.put("percent",edit_discount.getText().toString());
-                cv.put("barcode",edit_barcode.getText().toString());
-                db.insert("myCode", null, cv);
-                db.close();
-                setResult(REFRESH_ADAPTER);
-             finish();
+                int check;
+                if(checkBox.isChecked()){
+                    check=1;//общий доступ
+                }else check=0;
 
-                return true;
+                if(edit_name.getText().toString().trim().length() != 0 &&
+                        edit_discount.getText().toString().trim().length() != 0 &&
+                        edit_barcode.getText().toString().trim().length() != 0) {
 
+
+                    SQLiteDatabase db = dbHelper.getWritableDatabase();
+                    ContentValues cv = new ContentValues();
+                    cv.put("name", edit_name.getText().toString());
+                    cv.put("percent", edit_discount.getText().toString());
+                    cv.put("barcode", edit_barcode.getText().toString());
+                    cv.put("public", check);
+                    db.insert("myCode", null, cv);
+                    db.close();
+                    setResult(REFRESH_ADAPTER);
+                    finish();
+
+                    return true;
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }
+
     }
 
 }

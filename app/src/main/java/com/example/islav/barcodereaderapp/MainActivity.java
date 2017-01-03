@@ -1,10 +1,15 @@
 package com.example.islav.barcodereaderapp;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
 
 import com.example.islav.barcodereaderapp.adapter.ViewPagerAdapter;
@@ -17,10 +22,14 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton fab;
      ViewPager view_pager;
     ViewPagerAdapter adapter;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         TabLayout tab_layout = (TabLayout) findViewById(R.id.tab_layout);
         tab_layout.addTab(tab_layout.newTab().setText("Мои"));
         tab_layout.addTab(tab_layout.newTab().setText("Общие"));
@@ -86,6 +95,32 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_for_search_card, menu);
+        // Retrieve the SearchView and plug it into SearchManager
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
+        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+              /*  if(type == 1)
+                    usersFromDialog(newText);
+                else
+                    usersForDialog(newText);
+                return false;*/
+                return false;
+            }
+        });
+        return true;
     }
 }
 

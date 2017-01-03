@@ -17,7 +17,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table myCode ("
                 + "id integer primary key autoincrement, "
-                + "name text, percent text, barcode text " + ");");
+                + "name text, percent text, barcode text, public integer " + ");");
     }
 
     @Override
