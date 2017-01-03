@@ -8,11 +8,15 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.islav.barcodereaderapp.adapter.ViewPagerAdapter;
+import com.example.islav.barcodereaderapp.fragments.MyCardsFragment;
+import com.example.islav.barcodereaderapp.fragments.PublicCardsFragment;
 import com.github.clans.fab.FloatingActionButton;
 
 
 public class MainActivity extends AppCompatActivity {
     FloatingActionButton fab;
+     ViewPager view_pager;
+    ViewPagerAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tab_layout = (TabLayout) findViewById(R.id.tab_layout);
         tab_layout.addTab(tab_layout.newTab().setText("Мои"));
         tab_layout.addTab(tab_layout.newTab().setText("Общие"));
-        final ViewPager view_pager = (ViewPager) findViewById(R.id.pager);
+         view_pager = (ViewPager) findViewById(R.id.pager);
         view_pager.setOffscreenPageLimit(2);
-        final ViewPagerAdapter adapter = new ViewPagerAdapter
+          adapter = new ViewPagerAdapter
                 (getSupportFragmentManager(), tab_layout.getTabCount());
         view_pager.setAdapter(adapter);
 
@@ -48,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(MainActivity.this,CreateCardActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,1);
             }
         });
 
@@ -56,5 +60,32 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void refreshTab(int position, String textSearch) {
+        switch (position) {
+            case 0:
+                MyCardsFragment mf = (MyCardsFragment) adapter.getItem(position);
+                mf.update(textSearch);
+                break;
+            case 1:
+              //  PublicCardsFragment pf = (PublicCardsFragment) adapter.getItem(position);
+              //  pf.update(textSearch);
+                break;
+
+        }
+    }
+
+
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == CreateCardActivity.REFRESH_ADAPTER) {
+            refreshTab(0,"");
+            adapter.notifyDataSetChanged();
+
+
+        }
+    }
 }
 

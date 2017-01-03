@@ -8,9 +8,10 @@ public class Discount {
     private String code;
     private String path;
 
-    public Discount(String name, String discount_percent) {
+    public Discount(String name, String discount_percent,String barcode) {
         this.name = name;
         this.discount_percent = discount_percent;
+        this.code = barcode;
     }
 
     public String getName() {

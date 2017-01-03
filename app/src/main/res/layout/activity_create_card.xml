@@ -144,5 +144,31 @@
              />
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="12dp"
+        android:id="@+id/public_block"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_marginLeft="16dp"
+            android:id="@+id/ivContactItem4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:visibility="invisible"
+            android:src="@drawable/ic_lock_open_black_24dp" />
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="Общедоступный"
+            android:id="@+id/checkbox"
+            android:textColor="#727272"
+            android:layout_toRightOf="@+id/ivContactItem4"/>
+
+
+    </RelativeLayout>
+
 
 </LinearLayout>

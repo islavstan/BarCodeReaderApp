@@ -1,14 +1,19 @@
 package com.example.islav.barcodereaderapp;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.islav.barcodereaderapp.db.DBHelper;
 import com.google.zxing.Result;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
@@ -18,14 +23,22 @@ EditText edit_barcode;
 EditText edit_discount;
 EditText edit_name;
     private ZXingScannerView mScannerView;
+    DBHelper dbHelper;
+    Toolbar toolbar;
+    CheckBox checkBox;
+    public static final int REFRESH_ADAPTER=88;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_card);
+         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         edit_barcode=(EditText)findViewById(R.id.edit_barcode);
         edit_discount=(EditText)findViewById(R.id.edit_discount);
         edit_name=(EditText)findViewById(R.id.edit_name);
+        checkBox=(CheckBox)findViewById(R.id.checkbox) ;
+        dbHelper=new DBHelper(this);
         edit_barcode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,8 +69,15 @@ EditText edit_name;
         int id = item.getItemId();
         switch (id) {
             case R.id.save:
-
-
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                ContentValues cv = new ContentValues();
+                cv.put("name",edit_name.getText().toString());
+                cv.put("percent",edit_discount.getText().toString());
+                cv.put("barcode",edit_barcode.getText().toString());
+                db.insert("myCode", null, cv);
+                db.close();
+                setResult(REFRESH_ADAPTER);
+             finish();
 
                 return true;
 
