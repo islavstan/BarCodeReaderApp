@@ -9,9 +9,9 @@ import com.example.islav.barcodereaderapp.fragments.MyCardsFragment;
 import com.example.islav.barcodereaderapp.fragments.PublicCardsFragment;
 
 
-public class ViewPagerAdapter extends FragmentStatePagerAdapter {
+public class DiscountViewPagerAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
-    public ViewPagerAdapter(FragmentManager fm, int NumOfTabs) {
+    public DiscountViewPagerAdapter(FragmentManager fm, int NumOfTabs) {
         super(fm);
         this.mNumOfTabs = NumOfTabs;
 
