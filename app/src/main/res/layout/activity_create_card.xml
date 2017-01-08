@@ -30,10 +30,10 @@
         <ImageView
             android:layout_marginLeft="16dp"
             android:id="@+id/ivContactItem1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_store_mall_directory_black_24dp" />
+            android:src="@drawable/nike" />
 
         <TextView
             android:id="@+id/nameTV"
